@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حَسَدَحَسَدَحَسَدَ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+</head>
+<body>
+    <!-- Экран загрузки -->
+    <div id="loading-screen" class="container">
+        <div class="avatar">
+            <img src="assets/avatar.png" alt="Аватар" class="avatar-img">
+        </div>
+        <div class="nick">حَسَدَ</div>
+        <button class="button" id="start-button">Рай</button>
+    </div>
+    
+    <!-- Полноэкранный терминал -->
+    <div class="terminal-fullscreen" id="terminal-fullscreen">
+        <div class="terminal-loader">
+            <div class="terminal-header">
+                <div class="terminal-title">System Loading</div>
+                <div class="terminal-controls">
+                    <div class="control close"></div>
+                    <div class="control minimize"></div>
+                    <div class="control maximize"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="terminal-line">> <span id="status-text">Preparing data</span><span class="terminal-cursor"></span></div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar">0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Анимация пульса на фоне ВСЕГО ЭКРАНА -->
+    <div class="pulse-loader" id="pulse-loader">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="2000"
+            height="210"
+            viewBox="0 0 550 210"
+            preserveAspectRatio="none"
+        >
+            <!-- Градиент для пульса -->
+            <defs>
+                <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#B22222" stop-opacity="0.8" />
+                    <stop offset="25%" stop-color="#8B0000" stop-opacity="1" />
+                    <stop offset="50%" stop-color="#FF0000" stop-opacity="1" />
+                    <stop offset="75%" stop-color="#8B0000" stop-opacity="1" />
+                    <stop offset="100%" stop-color="#B22222" stop-opacity="0.8" />
+                </linearGradient>
+            </defs>
+            <path
+                d="m0,130.08h44.51c7.08-3.45,11.54-24.65,19.42-24.81s13.23,22.54,21.03,24.81c10.03,2.92,29.69-14.6,39.91-12.4,4.58.98,9.34,12.36,14.02,12.4,3.54.03,7.25-9.31,10.79-9.17,3.24.13,6.17,7.93,9.17,9.17s9.68-1.48,12.4,0c2.4,1.3,3.45,10.3,5.93,9.17,3.23-1.48,2.82-103.01,8.09-103.01,6.96,0,12.35,137.53,16.72,137.53,3.9,0-.09-36.61,8.49-43.69,3.41-2.81,13.69,1.93,17.66,0,7.17-3.49,11.72-24.71,19.69-25.08,8.62-.4,15.39,22.86,23.73,25.08,8.99,2.38,26.51-12.76,35.6-10.79,5.58,1.21,11.46,15.82,17.12,15.1,3.88-.49,4.87-12.59,8.76-12.94,3.01-.28,5.7,7.46,8.49,8.63s9.75-1.43,12.54,0,4.03,9.39,7.01,9.71c4.98.54,2.64-103.55,8.63-103.55,5.16,0,8.8,111.51,12.94,111.64,5.02.16,5.01-15.2,9.3-17.8s15.02,2.06,19.42,0c7.39-3.46,12.74-25.17,20.9-25.08,8.97.09,13.68,25.85,22.38,28.04,9.17,2.31,25.4-15.93,34.79-14.83,4.95.58,11.31,10.3,16.04,11.87h44.51"
+            ></path>
+        </svg>
+    </div>
+    
+<!-- Экран с информацией -->
+<div id="info-screen" class="container">
+    <h1 class="header"> true friend don't disappear</h1>
+    
+    <div class="kents-container">
+        <div class="kent">
+            <div class="kent-image-container" onclick="window.open('https://t.me/lirika77gm', '_blank')">
+                <img src="assets/kent1.png" alt="BLEYD" class="kent-img">
+                <div class="kent-overlay">
+                    <div class="kent-nick">BLEYD</div>
+                    <div class="kent-tg">@lirika77gm</div>
+                </div>
+            </div>
+            <h2 class="kent-title">1 кент</h2>
+            <p class="kent-info">swater</p>
+        </div>
+        <div class="kent">
+            <div class="kent-image-container" onclick="window.open('https://t.me/oxyell22', '_blank')">
+                <img src="assets/kent2.png" alt="EĆSTASY" class="kent-img">
+                <div class="kent-overlay">
+                    <div class="kent-nick">EĆSTASY</div>
+                    <div class="kent-tg">@oxyell22</div>
+                </div>
+            </div>
+            <h2 class="kent-title">2 кент</h2>
+            <p class="kent-info">murnый</p>
+        </div>
+        <div class="kent">
+            <div class="kent-image-container" onclick="window.open('https://t.me/traxaemm', '_blank')">
+                <img src="assets/kent3.png" alt="REKVIGEN 666" class="kent-img">
+                <div class="kent-overlay">
+                    <div class="kent-nick">SMERTNIK</div>
+                    <div class="kent-tg">@traxaemm</div>
+                </div>
+            </div>
+            <h2 class="kent-title">3 кент</h2>
+            <p class="kent-info">troll</p>
+        </div>
+    </div>
+    
+
+        
+        <!-- Микросхема вместо 3D карточки - БЕЗ ФОНА -->
+<div class="chip-section">
+    <div class="chip-container">
+        <div class="chip-loader">
+            <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="chipGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#2d2d2d"></stop>
+                        <stop offset="100%" stop-color="#0f0f0f"></stop>
+                    </linearGradient>
+
+                    <linearGradient id="textGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#eeeeee"></stop>
+                        <stop offset="100%" stop-color="#888888"></stop>
+                    </linearGradient>
+
+                    <linearGradient id="pinGradient" x1="1" y1="0" x2="0" y2="0">
+                        <stop offset="0%" stop-color="#bbbbbb"></stop>
+                        <stop offset="50%" stop-color="#888888"></stop>
+                        <stop offset="100%" stop-color="#555555"></stop>
+                    </linearGradient>
+                    
+                    <!-- Градиенты в стиле сайта -->
+                    <linearGradient id="redTrace" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#B22222"></stop>
+                        <stop offset="50%" stop-color="#FF0000"></stop>
+                        <stop offset="100%" stop-color="#8B0000"></stop>
+                    </linearGradient>
+                    
+                    <linearGradient id="darkTrace" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#333333"></stop>
+                        <stop offset="50%" stop-color="#666666"></stop>
+                        <stop offset="100%" stop-color="#333333"></stop>
+                    </linearGradient>
+                    
+                    <!-- Градиент для свечения -->
+                    <radialGradient id="chipGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#FF0000" stop-opacity="0.8"></stop>
+                        <stop offset="70%" stop-color="#B22222" stop-opacity="0.3"></stop>
+                        <stop offset="100%" stop-color="#8B0000" stop-opacity="0"></stop>
+                    </radialGradient>
+                </defs>
+
+                <!-- Фоновое свечение -->
+                <ellipse cx="400" cy="240" rx="200" ry="100" fill="url(#chipGlow)" opacity="0.3" class="chip-glow"></ellipse>
+
+                <g id="traces">
+                    <path d="M100 100 H200 V210 H326" class="trace-bg"></path>
+                    <path d="M100 100 H200 V210 H326" class="trace-flow trace-red"></path>
+
+                    <path d="M80 180 H180 V230 H326" class="trace-bg"></path>
+                    <path d="M80 180 H180 V230 H326" class="trace-flow trace-red"></path>
+
+                    <path d="M60 260 H150 V250 H326" class="trace-bg"></path>
+                    <path d="M60 260 H150 V250 H326" class="trace-flow trace-red"></path>
+
+                    <path d="M100 350 H200 V270 H326" class="trace-bg"></path>
+                    <path d="M100 350 H200 V270 H326" class="trace-flow trace-red"></path>
+
+                    <path d="M700 90 H560 V210 H474" class="trace-bg"></path>
+                    <path d="M700 90 H560 V210 H474" class="trace-flow trace-red"></path>
+
+                    <path d="M740 160 H580 V230 H474" class="trace-bg"></path>
+                    <path d="M740 160 H580 V230 H474" class="trace-flow trace-red"></path>
+
+                    <path d="M720 250 H590 V250 H474" class="trace-bg"></path>
+                    <path d="M720 250 H590 V250 H474" class="trace-flow trace-red"></path>
+
+                    <path d="M680 340 H570 V270 H474" class="trace-bg"></path>
+                    <path d="M680 340 H570 V270 H474" class="trace-flow trace-red"></path>
+                </g>
+
+                <rect
+                    x="330"
+                    y="190"
+                    width="140"
+                    height="100"
+                    rx="20"
+                    ry="20"
+                    fill="url(#chipGradient)"
+                    stroke="#222"
+                    stroke-width="2"
+                    filter="drop-shadow(0 0 15px rgba(178, 34, 34, 0.7))"
+                    class="chip-body"
+                ></rect>
+
+                <g class="chip-pins">
+                    <rect
+                        x="322"
+                        y="205"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                    <rect
+                        x="322"
+                        y="225"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                    <rect
+                        x="322"
+                        y="245"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                    <rect
+                        x="322"
+                        y="265"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                </g>
+
+                <g class="chip-pins">
+                    <rect
+                        x="470"
+                        y="205"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                    <rect
+                        x="470"
+                        y="225"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                    <rect
+                        x="470"
+                        y="245"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                    <rect
+                        x="470"
+                        y="265"
+                        width="8"
+                        height="10"
+                        fill="url(#pinGradient)"
+                        rx="2"
+                    ></rect>
+                </g>
+
+                <text
+                    x="400"
+                    y="240"
+                    font-family="'Courier New', monospace"
+                    font-size="19"
+                    fill="url(#textGradient)"
+                    text-anchor="middle"
+                    alignment-baseline="middle"
+                    class="chip-text"
+                >
+                    die with smile
+                </text>
+                
+                <text
+                    x="400"
+                    y="265"
+                    font-family="'Courier New', monospace"
+                    font-size="14"
+                    fill="#FF0000"
+                    text-anchor="middle"
+                    alignment-baseline="middle"
+                    class="chip-subtext"
+                >
+                    حَسَدَ
+                </text>
+
+                <!-- Входные точки -->
+                <g class="input-points">
+                    <circle cx="100" cy="100" r="5" fill="#B22222" class="input-dot"></circle>
+                    <circle cx="80" cy="180" r="5" fill="#B22222" class="input-dot"></circle>
+                    <circle cx="60" cy="260" r="5" fill="#B22222" class="input-dot"></circle>
+                    <circle cx="100" cy="350" r="5" fill="#B22222" class="input-dot"></circle>
+                </g>
+
+                <!-- Выходные точки -->
+                <g class="output-points">
+                    <circle cx="700" cy="90" r="5" fill="#B22222" class="output-dot"></circle>
+                    <circle cx="740" cy="160" r="5" fill="#B22222" class="output-dot"></circle>
+                    <circle cx="720" cy="250" r="5" fill="#B22222" class="output-dot"></circle>
+                    <circle cx="680" cy="340" r="5" fill="#B22222" class="output-dot"></circle>
+                </g>
+                
+                <!-- Анимированные точки активности -->
+                <g class="activity-dots">
+                    <circle cx="340" cy="220" r="3" fill="#FF0000" class="pulse-dot"></circle>
+                    <circle cx="380" cy="220" r="3" fill="#FF0000" class="pulse-dot"></circle>
+                    <circle cx="420" cy="220" r="3" fill="#FF0000" class="pulse-dot"></circle>
+                    <circle cx="460" cy="220" r="3" fill="#FF0000" class="pulse-dot"></circle>
+                </g>
+                
+                <!-- Дополнительные точки активности -->
+                <g class="activity-dots">
+                    <circle cx="360" cy="260" r="2" fill="#B22222" class="pulse-dot-small"></circle>
+                    <circle cx="400" cy="260" r="2" fill="#B22222" class="pulse-dot-small"></circle>
+                    <circle cx="440" cy="260" r="2" fill="#B22222" class="pulse-dot-small"></circle>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>
+    
+    <!-- Анимация в левом нижнем углу -->
+    <div class="loader-container">
+        <div class="loader">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+                <defs>
+                    <mask id="clipping">
+                        <polygon points="0,0 100,0 100,100 0,100" fill="black"></polygon>
+                        <polygon points="25,25 75,25 50,75" fill="white"></polygon>
+                        <polygon points="50,25 75,75 25,75" fill="white"></polygon>
+                        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                        <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                    </mask>
+                </defs>
+            </svg>
+            <div class="box"></div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

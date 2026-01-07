@@ -1,0 +1,974 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.6);
+    background-image: url(../assets/background.png);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: darken;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Стили для экрана загрузки */
+#loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.nick {
+    font-size: 42px;
+    margin-bottom: 30px;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #1f1f1f,
+        0 0 35px #1f1f1f,
+        0 0 40px #1f1f1f;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 2px;
+    animation: neonFlicker 1.5s infinite alternate;
+}
+
+@keyframes neonFlicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+            0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 15px #fff,
+            0 0 20px #1f1f1f,
+            0 0 35px #1f1f1f,
+            0 0 40px #1f1f1f;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+
+.button {
+    padding: 18px 50px;
+    background: rgba(30, 30, 30, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.button:hover {
+    background: rgba(41, 41, 41, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.button:hover::before {
+    left: 100%;
+}
+/* Анимация пульсации для кнопки */
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 
+            0 5px 15px rgba(118, 75, 162, 0.4),
+            0 0 20px rgba(102, 126, 234, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 5px 20px rgba(65, 65, 65, 0.6),
+            0 0 30px rgba(14, 18, 37, 0.5);
+    }
+    100% {
+        box-shadow: 
+            0 5px 15px rgba(118, 75, 162, 0.4),
+            0 0 20px rgba(102, 126, 234, 0.3);
+    }
+}
+
+.button {
+    animation: buttonPulse 2s infinite;
+}
+
+/* Дополнительные эффекты для контейнера */
+#loading-screen {
+    position: relative;
+}
+
+#loading-screen::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 198, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+/* Стили для экрана с информацией */
+#info-screen {
+    display: none;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.header {
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.kents-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 3;
+}
+
+.kent {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+}
+
+.kent:hover {
+    transform: translateY(-5px);
+}
+
+.kent-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+
+.kent-info {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.model-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 3;
+}
+
+.model-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+
+.model-placeholder {
+    height: 200px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Стили для полноэкранного терминала */
+.terminal-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.terminal-loader {
+    border: 0.1em solid #333;
+    background-color: #1a1a1a;
+    color: #0f0;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.2em;
+    padding: 2em;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.terminal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2em;
+    background-color: #333;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 0 0.8em;
+    box-sizing: border-box;
+}
+
+.terminal-controls {
+    float: right;
+}
+
+.control {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.6em;
+    border-radius: 50%;
+    background-color: #777;
+}
+
+.control.close {
+    background-color: #e33;
+}
+
+.control.minimize {
+    background-color: #ee0;
+}
+
+.control.maximize {
+    background-color: #0b0;
+}
+
+.terminal-title {
+    float: left;
+    line-height: 2em;
+    color: #eee;
+    font-weight: bold;
+}
+
+.terminal-content {
+    margin-top: 2.56em;
+    text-align: left;
+}
+
+.terminal-line {
+    margin-bottom: 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 0.8em;
+    height: 1.2em;
+    background-color: rgb(70, 70, 70);
+    animation: blink 1s infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+.progress-container {
+    margin-top: 1.5em;
+    background-color: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 0.4em;
+    border-radius: 35px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, rgb(0, 0, 0), rgb(70, 70, 70));
+    width: 0%;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: #000;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 35px;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Обновленные стили для аватара с картинкой */
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    overflow: hidden; /* Важно для обрезки картинки по кругу */
+    position: relative;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинка заполняет круг без искажений */
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* Эффект при наведении на аватар */
+.avatar:hover .avatar-img {
+    transform: scale(1.05);
+}
+
+/* Фолбэк если картинка не загрузится */
+.avatar::before {
+    content: "👤";
+    position: absolute;
+    font-size: 60px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    border-radius: 50%;
+}
+
+.avatar:has(.avatar-img[src])::before {
+    display: none;
+}
+
+/* ===== СЕКЦИЯ МИКРОСХЕМЫ - БЕЗ ФОНА ===== */
+.chip-section {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 20px 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+    margin-top: 40px;
+}
+
+.chip-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ffcc00;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 20px;
+}
+
+.chip-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ffcc00, transparent);
+}
+
+.chip-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+    position: relative;
+}
+
+.chip-loader {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 20px rgba(178, 34, 34, 0.4));
+}
+
+/* Стили для микросхемы */
+.trace-bg {
+    stroke: #222;
+    stroke-width: 1.5;
+    fill: none;
+    opacity: 0.3;
+}
+
+.trace-flow {
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 40 400;
+    stroke-dashoffset: 438;
+    filter: drop-shadow(0 0 10px currentColor);
+    animation: flow 3s cubic-bezier(0.5, 0, 0.9, 1) infinite;
+}
+
+.trace-red {
+    stroke: url(#redTrace);
+    color: #FF0000;
+}
+
+@keyframes flow {
+    0% {
+        stroke-dashoffset: 438;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Анимация для чипа */
+.chip-body {
+    animation: chipPulse 4s infinite alternate;
+    filter: drop-shadow(0 0 20px rgba(178, 34, 34, 0.8));
+}
+
+@keyframes chipPulse {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(178, 34, 34, 0.6));
+    }
+    100% {
+        filter: drop-shadow(0 0 25px rgba(178, 34, 34, 0.9));
+    }
+}
+
+/* Свечение вокруг чипа */
+.chip-glow {
+    animation: glowPulse 3s infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+}
+
+/* Анимация для пульсирующих точек */
+@keyframes dotPulse {
+    0%, 100% {
+        opacity: 0.3;
+        r: 2;
+        fill: #B22222;
+    }
+    50% {
+        opacity: 1;
+        r: 4;
+        fill: #FF0000;
+    }
+}
+
+@keyframes dotPulseSmall {
+    0%, 100% {
+        opacity: 0.2;
+        r: 1;
+        fill: #8B0000;
+    }
+    50% {
+        opacity: 0.6;
+        r: 2;
+        fill: #B22222;
+    }
+}
+
+.pulse-dot {
+    animation: dotPulse 1.5s infinite ease-in-out;
+}
+
+.pulse-dot-small {
+    animation: dotPulseSmall 2s infinite ease-in-out;
+}
+
+.pulse-dot:nth-child(1) { animation-delay: 0s; }
+.pulse-dot:nth-child(2) { animation-delay: 0.2s; }
+.pulse-dot:nth-child(3) { animation-delay: 0.4s; }
+.pulse-dot:nth-child(4) { animation-delay: 0.6s; }
+
+.pulse-dot-small:nth-child(1) { animation-delay: 0.1s; }
+.pulse-dot-small:nth-child(2) { animation-delay: 0.3s; }
+.pulse-dot-small:nth-child(3) { animation-delay: 0.5s; }
+
+/* Анимация входных/выходных точек */
+@keyframes inputPulse {
+    0%, 100% {
+        opacity: 0.5;
+        fill: #8B0000;
+    }
+    50% {
+        opacity: 1;
+        fill: #FF0000;
+    }
+}
+
+.input-dot, .output-dot {
+    animation: inputPulse 2s infinite ease-in-out;
+}
+
+.input-dot:nth-child(1) { animation-delay: 0s; }
+.input-dot:nth-child(2) { animation-delay: 0.5s; }
+.input-dot:nth-child(3) { animation-delay: 1s; }
+.input-dot:nth-child(4) { animation-delay: 1.5s; }
+
+.output-dot:nth-child(1) { animation-delay: 0.25s; }
+.output-dot:nth-child(2) { animation-delay: 0.75s; }
+.output-dot:nth-child(3) { animation-delay: 1.25s; }
+.output-dot:nth-child(4) { animation-delay: 1.75s; }
+
+/* Текст чипа */
+.chip-text {
+    animation: textGlow 2s infinite alternate;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.chip-subtext {
+    animation: subtextGlow 2s infinite alternate;
+    font-weight: bold;
+}
+
+@keyframes textGlow {
+    0% {
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    }
+}
+
+@keyframes subtextGlow {
+    0% {
+        filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.3));
+    }
+    100% {
+        filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.6));
+    }
+}
+
+/* Эффект при наведении на микросхему */
+.chip-loader:hover {
+    filter: drop-shadow(0 0 30px rgba(178, 34, 34, 0.8));
+}
+
+.chip-loader:hover .trace-flow {
+    animation-duration: 1.5s;
+    stroke-width: 2.5;
+}
+
+.chip-loader:hover .chip-body {
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.9));
+}
+
+.chip-loader:hover .chip-glow {
+    opacity: 0.5;
+}
+
+/* Анимация появления микросхемы */
+@keyframes chipAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+.chip-loader svg {
+    animation: chipAppear 1.2s ease-out;
+}
+
+/* Свечение вокруг секции (убрано) */
+.chip-section::before {
+    display: none;
+}
+
+/* Адаптивность для микросхемы */
+@media (max-width: 768px) {
+    .chip-container {
+        height: 300px;
+    }
+    
+    .chip-title {
+        font-size: 20px;
+    }
+    
+    .chip-loader {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 480px) {
+    .chip-container {
+        height: 250px;
+    }
+    
+    .chip-section {
+        padding: 10px 0;
+    }
+    
+    .chip-loader {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 360px) {
+    .chip-loader {
+        transform: scale(0.7);
+    }
+}
+
+/* ===== ПЛАШКИ С КЕНТАМИ - УМЕНЬШЕННЫЕ ===== */
+.kents-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 3;
+}
+
+.kent {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    padding: 15px;
+    width: 180px; /* Уменьшил с 280px */
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(178, 34, 34, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(178, 34, 34, 0.3);
+}
+
+.kent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #B22222, 
+        #FF0000, 
+        #B22222, 
+        transparent);
+    z-index: 2;
+}
+
+.kent:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 10px 25px rgba(178, 34, 34, 0.4),
+        0 0 0 1px rgba(255, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+/* Контейнер для изображения */
+.kent-image-container {
+    position: relative;
+    width: 150px; /* Уменьшил с 240px */
+    height: 150px; /* Уменьшил с 240px */
+    margin: 0 auto 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.kent-image-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(178, 34, 34, 0.5);
+}
+
+.kent-image-container:hover .kent-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.kent-image-container:hover .kent-img {
+    filter: brightness(0.7) contrast(1.2);
+}
+
+/* Изображение кента */
+.kent-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Оверлей поверх изображения */
+.kent-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: 15px 10px 10px;
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+}
+
+/* Никнейм на оверлее */
+.kent-nick {
+    font-size: 16px; /* Уменьшил с 22px */
+    font-weight: bold;
+    color: #ffcc00;
+    text-shadow: 
+        0 0 4px rgba(255, 204, 0, 0.5),
+        0 0 8px rgba(255, 204, 0, 0.3);
+    margin-bottom: 3px;
+    letter-spacing: 0.5px;
+}
+
+.kent-tg {
+    font-size: 12px; /* Уменьшил с 14px */
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    opacity: 0.8;
+}
+
+/* Заголовок плашки */
+.kent-title {
+    font-size: 16px; /* Уменьшил с 20px */
+    margin: 10px 0 5px;
+    color: #FF0000;
+    text-align: center;
+    text-shadow: 0 0 6px rgba(255, 0, 0, 0.5);
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.kent-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    right: 25%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #FF0000, transparent);
+}
+
+/* Информация под плашкой */
+.kent-info {
+    font-size: 14px; /* Уменьшил с 16px */
+    line-height: 1.4;
+    color: #cccccc;
+    text-align: center;
+    opacity: 0.9;
+}
+
+/* Иконка телеграма */
+.kent::after {
+    content: '↗';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 14px; /* Уменьшил с 18px */
+    color: #0088cc;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.kent:hover::after {
+    opacity: 1;
+    transform: rotate(45deg);
+    color: #ffcc00;
+}
+
+/* Анимация появления плашек */
+@keyframes kentAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.kent:nth-child(1) {
+    animation: kentAppear 0.5s ease-out 0.2s both;
+}
+
+.kent:nth-child(2) {
+    animation: kentAppear 0.5s ease-out 0.3s both;
+}
+
+.kent:nth-child(3) {
+    animation: kentAppear 0.5s ease-out 0.4s both;
+}
+
+/* Эффект свечения вокруг плашек */
+.kent::before {
+    animation: borderGlow 3s infinite linear;
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Адаптивность для плашек */
+@media (max-width: 768px) {
+    .kent {
+        width: 160px;
+        padding: 12px;
+    }
+    
+    .kent-image-container {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .kent-nick {
+        font-size: 14px;
+    }
+    
+    .kent-title {
+        font-size: 14px;
+    }
+    
+    .kent-info {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .kents-container {
+        gap: 15px;
+    }
+    
+    .kent {
+        width: 140px;
+        padding: 10px;
+    }
+    
+    .kent-image-container {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .kent-nick {
+        font-size: 13px;
+    }
+    
+    .kent-title {
+        font-size: 13px;
+    }
+}
+
